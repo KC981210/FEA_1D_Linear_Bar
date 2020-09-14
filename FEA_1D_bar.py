@@ -1,9 +1,7 @@
-#FEA program for  nodal displacement, elemental stresses, and support reaction for stepped bar with different cross-section 
-#by Ketan Chaudhari
-
 
 #import numpy
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 # Number of elements and nodes.
@@ -69,3 +67,17 @@ R1 = (np.matmul(K[0], X)-F[0])/10**3
 print("\n Reaction at Fixed node(R1)=  ", R1[0, 0], "kN")
 
 
+# Claculation For Strain
+for h in range(e):
+    g = h+1
+    Strain = S1[h]/E1[h]
+    print("\n  Strain at Element %d =" % g, Strain, "\n")
+    S2.append(Strain)
+
+ #Plotting Stress-Strain Variation Curve
+plt.title("STRESS vs STRAIN Variation Curve ")
+plt.xlabel("STRAIN")
+plt.ylabel("STRESS")
+plt.grid(True)
+plt.plot(S2, S1, 'r-', S2, S1, 'bo')
+plt.show()
